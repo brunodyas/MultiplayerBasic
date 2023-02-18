@@ -3,13 +3,28 @@
 
 #include "PersonagemTPS.h"
 #include "Components/InputComponent.h"
+#include "Camera/CameraComponent.h"
+#include "GameFramework/SpringArmComponent.h"
 
-// Sets default values
+// Construtor
 APersonagemTPS::APersonagemTPS()
 {
  	// Set this character to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
 
+	// Setup Camera
+	SpringArmCamera = CreateDefaultSubobject<USpringArmComponent>(FName("SpringArmCamera"));
+	SpringArmCamera->TargetArmLength = 200.f;
+	SpringArmCamera->bUsePawnControlRotation = true;
+	SpringArmCamera->AddRelativeLocation(FVector(0.f,40.f,50.f));
+	SpringArmCamera->SetupAttachment(RootComponent);
+
+	CameraPersonagem = CreateDefaultSubobject<UCameraComponent>(FName("CameraPersonagem"));
+	CameraPersonagem->SetupAttachment(SpringArmCamera);
+
+	// Auto possess
+	AutoPossessPlayer = EAutoReceiveInput::Player0;
+	
 }
 
 // Called when the game starts or when spawned
@@ -43,6 +58,7 @@ void APersonagemTPS::SetupPlayerInputComponent(UInputComponent* PlayerInputCompo
 
 	PlayerInputComponent->BindAxis("MoverParaFrente", this, &APersonagemTPS::MoverParaFrente);
 	PlayerInputComponent->BindAxis("MoverDireita", this, &APersonagemTPS::MoverDireita);
-
-}
+	PlayerInputComponent->BindAxis("OlharCimaBaixo", this, &APersonagemTPS::AddControllerPitchInput);
+	PlayerInputComponent->BindAxis("OlharEsquerdaDireita", this, &APersonagemTPS::AddControllerYawInput);
+}	
 

@@ -21,6 +21,12 @@ protected:
 	
 	void MoverParaFrente(float Valor);
 	void MoverDireita(float Valor);
+	
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Camera")
+	class UCameraComponent* CameraPersonagem;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Camera")
+	class USpringArmComponent* SpringArmCamera;
 
 public:	
 	// Called every frame
