@@ -72,3 +72,12 @@ Plugins/*/Intermediate/*
 
 # Cache files for the editor to use
 DerivedDataCache/*
+<<<<<<< HEAD
+
+# Ignorar a pasta VersaoTemp
+VersaoBase/WarriorCards/Intermediate/*
+VersaoBase/WarriorCards/Binaries/*
+VersaoTemp/*
+
+=======
+>>>>>>> parent of 2833f80 (Reistruturacao)
